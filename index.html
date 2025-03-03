@@ -164,6 +164,12 @@
             width: 130px;
             height: 130px;
         }
+        
+        .status-message {
+            margin-top: 15px;
+            font-style: italic;
+            color: #cbd5e1;
+        }
     </style>
 </head>
 <body>
@@ -186,6 +192,7 @@
                 <p>Cargando reproductor...</p>
             </div>
             <p id="warning-message" class="warning-message">Debes escuchar la canción completa para continuar</p>
+            <p id="status-message" class="status-message"></p>
         </div>
         
         <button id="download-button">Leer mensaje</button>
@@ -227,6 +234,7 @@
         let videoStarted = false;
         let validPlaythrough = true;
         let checkInterval;
+        let videoEnded = false;
         
         // Función para cargar el reproductor de YouTube
         function loadYouTubePlayer() {
@@ -235,7 +243,8 @@
             iframe.width = "560";
             iframe.height = "315";
             // ID del video "El embrujo" de Morat
-            iframe.src = "https://www.youtube.com/embed/4pPMt6ZhCa4?enablejsapi=1&disablekb=1&modestbranding=1&controls=0&rel=0";
+            // Añadimos loop=0 para asegurar que no se repite
+            iframe.src = "https://www.youtube.com/embed/4pPMt6ZhCa4?enablejsapi=1&disablekb=1&modestbranding=1&controls=0&rel=0&loop=0";
             iframe.frameborder = "0";
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
             iframe.allowFullscreen = true;
@@ -265,21 +274,43 @@
         
         // Función ejecutada cuando el reproductor está listo
         function onPlayerReady(event) {
-            videoLength = player.getDuration();
-            
-            // Configurar la verificación de avance del video
-            checkInterval = setInterval(checkPlaybackProgress, 1000);
+            // Obtener la duración del video
+            setTimeout(function() {
+                videoLength = player.getDuration();
+                console.log("Duración del video: " + videoLength + " segundos");
+                
+                // Iniciar la reproducción
+                player.playVideo();
+                
+                // Configurar la verificación de avance del video
+                checkInterval = setInterval(checkPlaybackProgress, 1000);
+                
+                // Actualizar mensaje de estado
+                updateStatusMessage("Reproduciendo...");
+            }, 1000);
         }
         
         // Función para verificar el progreso de reproducción
         function checkPlaybackProgress() {
-            if (!player || player.getPlayerState() !== YT.PlayerState.PLAYING) return;
+            if (!player) return;
             
-            if (!videoStarted && player.getCurrentTime() > 0) {
-                videoStarted = true;
+            const playerState = player.getPlayerState();
+            const currentTime = player.getCurrentTime();
+            
+            // Actualizar mensaje de estado
+            if (playerState === YT.PlayerState.PLAYING) {
+                const timeLeft = Math.max(0, videoLength - currentTime);
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = Math.floor(timeLeft % 60);
+                updateStatusMessage(`Tiempo restante: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
             }
             
-            const currentTime = player.getCurrentTime();
+            // No continuar con la verificación si el video no está reproduciéndose
+            if (playerState !== YT.PlayerState.PLAYING) return;
+            
+            if (!videoStarted && currentTime > 0) {
+                videoStarted = true;
+            }
             
             // Verificar si el usuario ha saltado adelante en el video
             if (videoStarted && currentTime > lastPlayheadPosition + 2) {
@@ -289,14 +320,26 @@
                 showWarningMessage();
             }
             
+            // Verificar si el video está cerca del final (últimos 3 segundos)
+            if (videoLength > 0 && currentTime >= videoLength - 3) {
+                console.log("Video cerca del final: " + currentTime + " / " + videoLength);
+            }
+            
             lastPlayheadPosition = currentTime;
         }
         
         // Función para manejar cambios en el estado del reproductor
         function onPlayerStateChange(event) {
+            console.log("Estado del reproductor: " + event.data);
+            
             // Estado 0 significa que el video ha terminado
             if (event.data === YT.PlayerState.ENDED) {
+                console.log("Video terminado");
                 clearInterval(checkInterval);
+                videoEnded = true;
+                
+                // Detener cualquier verificación adicional
+                updateStatusMessage("¡Video completado! Ahora puedes leer el mensaje.");
                 
                 if (validPlaythrough) {
                     // Mostrar el botón para ver la carta
@@ -307,8 +350,8 @@
                 }
             }
             
-            // Si el usuario pausa el video, considerar que está intentando burlar el sistema
-            if (event.data === YT.PlayerState.PAUSED) {
+            // Si el usuario pausa el video y no ha terminado, considerar que está intentando burlar el sistema
+            if (event.data === YT.PlayerState.PAUSED && !videoEnded) {
                 validPlaythrough = false;
                 player.playVideo(); // Forzar continuar reproducción
                 showWarningMessage();
@@ -326,10 +369,17 @@
             }, 3000);
         }
         
+        // Actualizar mensaje de estado
+        function updateStatusMessage(message) {
+            const statusMsg = document.getElementById('status-message');
+            statusMsg.textContent = message;
+        }
+        
         // Reiniciar la reproducción
         function resetPlayback() {
             validPlaythrough = true;
             videoStarted = false;
+            videoEnded = false;
             lastPlayheadPosition = 0;
             player.seekTo(0, true);
             player.playVideo();
@@ -337,6 +387,8 @@
             // Reiniciar el intervalo de verificación
             clearInterval(checkInterval);
             checkInterval = setInterval(checkPlaybackProgress, 1000);
+            
+            updateStatusMessage("Reproduciendo desde el inicio...");
         }
         
         // Cargar el reproductor cuando la página esté lista
