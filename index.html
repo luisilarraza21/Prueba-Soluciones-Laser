@@ -118,6 +118,13 @@
             box-shadow: 0 0 15px rgba(255, 183, 0, 0.7);
         }
         
+        .warning-message {
+            color: #fbbf24;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+        
         /* Estilo para remolinos al estilo Van Gogh */
         .swirl {
             position: absolute;
@@ -178,12 +185,13 @@
             <div id="player-container">
                 <p>Cargando reproductor...</p>
             </div>
+            <p id="warning-message" class="warning-message">Debes escuchar la canción completa para continuar</p>
         </div>
         
         <button id="download-button">Leer mensaje</button>
         
         <div id="letter" class="letter-section">
-             <h2 class="letter-title">Para mi mejor amiga</h2>
+            <h2 class="letter-title">Para mi mejor amiga</h2>
             
             <!-- Aquí escribe tu carta. Este es solo un ejemplo, reemplázalo con tus propias palabras -->
             <p>Querida Xiolymar,</p>
@@ -208,11 +216,18 @@
 
             <p>¿Te gustaría tener una cita conmigo, con más intenciones que solo ser tu amigo?</p>
             
-            </div>
         </div>
     </div>
 
     <script>
+        // Variables para el control de la reproducción
+        let player;
+        let videoLength = 0;
+        let lastPlayheadPosition = 0;
+        let videoStarted = false;
+        let validPlaythrough = true;
+        let checkInterval;
+        
         // Función para cargar el reproductor de YouTube
         function loadYouTubePlayer() {
             // Crear un elemento iframe para el reproductor de YouTube
@@ -220,7 +235,7 @@
             iframe.width = "560";
             iframe.height = "315";
             // ID del video "El embrujo" de Morat
-            iframe.src = "https://www.youtube.com/embed/4pPMt6ZhCa4?enablejsapi=1";
+            iframe.src = "https://www.youtube.com/embed/4pPMt6ZhCa4?enablejsapi=1&disablekb=1&modestbranding=1&controls=0&rel=0";
             iframe.frameborder = "0";
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
             iframe.allowFullscreen = true;
@@ -238,25 +253,90 @@
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }
         
-        // Variable para el reproductor de YouTube
-        let player;
-        
         // Función llamada por la API de YouTube cuando está lista
         window.onYouTubeIframeAPIReady = function() {
             player = new YT.Player('youtube-player', {
                 events: {
+                    'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
                 }
             });
         };
         
+        // Función ejecutada cuando el reproductor está listo
+        function onPlayerReady(event) {
+            videoLength = player.getDuration();
+            
+            // Configurar la verificación de avance del video
+            checkInterval = setInterval(checkPlaybackProgress, 1000);
+        }
+        
+        // Función para verificar el progreso de reproducción
+        function checkPlaybackProgress() {
+            if (!player || player.getPlayerState() !== YT.PlayerState.PLAYING) return;
+            
+            if (!videoStarted && player.getCurrentTime() > 0) {
+                videoStarted = true;
+            }
+            
+            const currentTime = player.getCurrentTime();
+            
+            // Verificar si el usuario ha saltado adelante en el video
+            if (videoStarted && currentTime > lastPlayheadPosition + 2) {
+                // El usuario ha saltado hacia adelante
+                validPlaythrough = false;
+                player.seekTo(0, true); // Reiniciar el video
+                showWarningMessage();
+            }
+            
+            lastPlayheadPosition = currentTime;
+        }
+        
         // Función para manejar cambios en el estado del reproductor
         function onPlayerStateChange(event) {
             // Estado 0 significa que el video ha terminado
-            if (event.data === 0) {
-                // Mostrar el botón para ver la carta
-                document.getElementById('download-button').style.display = 'inline-block';
+            if (event.data === YT.PlayerState.ENDED) {
+                clearInterval(checkInterval);
+                
+                if (validPlaythrough) {
+                    // Mostrar el botón para ver la carta
+                    document.getElementById('download-button').style.display = 'inline-block';
+                } else {
+                    // Reiniciar el video y el estado
+                    resetPlayback();
+                }
             }
+            
+            // Si el usuario pausa el video, considerar que está intentando burlar el sistema
+            if (event.data === YT.PlayerState.PAUSED) {
+                validPlaythrough = false;
+                player.playVideo(); // Forzar continuar reproducción
+                showWarningMessage();
+            }
+        }
+        
+        // Mostrar mensaje de advertencia
+        function showWarningMessage() {
+            const warningMsg = document.getElementById('warning-message');
+            warningMsg.style.display = 'block';
+            
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(function() {
+                warningMsg.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Reiniciar la reproducción
+        function resetPlayback() {
+            validPlaythrough = true;
+            videoStarted = false;
+            lastPlayheadPosition = 0;
+            player.seekTo(0, true);
+            player.playVideo();
+            
+            // Reiniciar el intervalo de verificación
+            clearInterval(checkInterval);
+            checkInterval = setInterval(checkPlaybackProgress, 1000);
         }
         
         // Cargar el reproductor cuando la página esté lista
