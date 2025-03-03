@@ -7,144 +7,165 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #0c1445 0%, #1e4264 50%, #2c5a7a 100%);
+            background-color: #0e1a40; /* Azul oscuro como el cielo nocturno */
+            background-image: linear-gradient(to bottom, #0e1a40, #1e3a8a);
             margin: 0;
             padding: 0;
             text-align: center;
-            color: #fff;
+            color: #f1f5f9;
             background-attachment: fixed;
             position: relative;
-            min-height: 100vh;
             overflow-x: hidden;
         }
-
+        
+        /* Estrellas y remolinos inspirados en Van Gogh */
         body::before {
             content: "";
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            z-index: 1;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 20% 30%, #fde68a 1px, transparent 4px),
+                radial-gradient(circle at 40% 70%, #fde68a 1px, transparent 3px),
+                radial-gradient(circle at 60% 20%, #fde68a 1px, transparent 5px),
+                radial-gradient(circle at 80% 40%, #fde68a 1px, transparent 4px),
+                radial-gradient(circle at 10% 90%, #fde68a 1px, transparent 3px),
+                radial-gradient(circle at 90% 10%, #fde68a 1px, transparent 5px),
+                radial-gradient(circle at 30% 50%, #fde68a 1px, transparent 3px),
+                radial-gradient(circle at 70% 80%, #fde68a 1px, transparent 4px);
+            opacity: 0.7;
         }
-
-        .swirl {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(#f3d673, #f8de8f, transparent 70%);
-            opacity: 0.6;
-            z-index: 0;
-        }
-
-        .swirl-1 {
-            width: 180px;
-            height: 180px;
-            top: 15%;
-            right: 10%;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .swirl-2 {
-            width: 100px;
-            height: 100px;
-            top: 35%;
-            left: 15%;
-            animation: float 18s infinite ease-in-out reverse;
-        }
-
-        .swirl-3 {
-            width: 120px;
-            height: 120px;
-            bottom: 20%;
-            right: 25%;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-            25% { transform: translateY(-10px) translateX(15px) rotate(5deg); }
-            50% { transform: translateY(0) translateX(0) rotate(0deg); }
-            75% { transform: translateY(10px) translateX(-15px) rotate(-5deg); }
-        }
-
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
-
+        
         h1 {
-            color: #f3d673;
+            color: #fbbf24; /* Amarillo como las estrellas */
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-size: 2.2em;
+            font-size: 2rem;
+            text-shadow: 0 0 5px rgba(251, 191, 36, 0.5);
         }
-
+        
         .music-player {
             margin: 40px auto;
             padding: 20px;
-            background-color: rgba(44, 62, 106, 0.7);
+            background-color: rgba(30, 41, 59, 0.8); /* Fondo semitransparente */
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid #475569;
         }
-
+        
         .instructions {
             margin-bottom: 20px;
             font-style: italic;
-            color: #f3d673;
+            color: #cbd5e1;
         }
-
-        .letter-container {
+        
+        .letter-section {
             display: none;
             margin-top: 40px;
-            text-align: center;
-        }
-
-        .letter-image {
-            max-width: 100%;
+            padding: 30px;
+            background-color: rgba(30, 41, 59, 0.9); /* Azul oscuro semitransparente */
             border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            border: 3px solid #f3d673;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: justify; /* Texto justificado */
+            line-height: 1.8;
+            border: 1px solid #475569;
+            color: #f8fafc; /* Color claro para buena legibilidad */
         }
-
+        
+        .letter-title {
+            text-align: center;
+            color: #fbbf24; /* Amarillo como las estrellas */
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            text-shadow: 0 0 5px rgba(251, 191, 36, 0.5);
+        }
+        
+        .signature {
+            margin-top: 30px;
+            text-align: right;
+            font-style: italic;
+            color: #fbbf24; /* Amarillo como las estrellas */
+        }
+        
         button {
-            background: linear-gradient(to right, #f3d673, #e9bc4f);
-            color: #0c1445;
+            background-color: #ffa500; /* Naranja-amarillo reminiscente de las estrellas */
+            color: #0e1a40;
             border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
+            padding: 12px 24px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
             margin-top: 20px;
             display: none;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
             transition: all 0.3s ease;
         }
-
+        
         button:hover {
-            background: linear-gradient(to right, #e9bc4f, #f3d673);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            background-color: #ffb700;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 183, 0, 0.7);
+        }
+        
+        /* Estilo para remolinos al estilo Van Gogh */
+        .swirl {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(ellipse at center, transparent 30%, rgba(255, 210, 80, 0.1) 100%);
+            box-shadow: 0 0 20px rgba(255, 210, 80, 0.2);
+            z-index: -1;
+        }
+        
+        .swirl:nth-child(1) {
+            top: 10%;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+        }
+        
+        .swirl:nth-child(2) {
+            bottom: 20%;
+            left: 10%;
+            width: 180px;
+            height: 180px;
+        }
+        
+        .swirl:nth-child(3) {
+            top: 40%;
+            left: 5%;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .swirl:nth-child(4) {
+            bottom: 10%;
+            right: 15%;
+            width: 130px;
+            height: 130px;
         }
     </style>
 </head>
 <body>
-    <div class="swirl swirl-1"></div>
-    <div class="swirl swirl-2"></div>
-    <div class="swirl swirl-3"></div>
-
+    <!-- Remolinos al estilo Van Gogh -->
+    <div class="swirl"></div>
+    <div class="swirl"></div>
+    <div class="swirl"></div>
+    <div class="swirl"></div>
+    
     <div class="container">
         <h1>Tengo algo importante que decirte, Xiolymar...</h1>
         
@@ -159,12 +180,10 @@
             </div>
         </div>
         
-        <button id="view-message-button">Ver mi mensaje</button>
-        
         <button id="download-button">Leer mensaje</button>
         
         <div id="letter" class="letter-section">
-            <h2 class="letter-title">Para la persona más especial en mi vida</h2>
+             <h2 class="letter-title">Para mi mejor amiga</h2>
             
             <!-- Aquí escribe tu carta. Este es solo un ejemplo, reemplázalo con tus propias palabras -->
             <p>Querida Xiolymar,</p>
@@ -185,15 +204,13 @@
 
             <p>Quisiera poder extenderme y hablar todo lo que he sentido durante todo este tiempo, pero no hacen falta muchas palabras para decir algo de lo que estoy seguro, y es que te quiero a mi lado, por mucho más tiempo, como amigos, o como lo que estemos dispuestos a construir.</p>
 
-            <p>No espero que este mensaje tenga una respuesta inmediata, ni que sea positiva, mi amistad por ti vale más que eso, y quiero que lo tengas claro, quiero seguir aquí pase lo que pase, tampoco espero que después de hoy, tengamos una boda maravillosa, lo estuve pensando, (Aunque si quiero boda en playa) pero, después de 12 largos años, hay solo una pregunta que hacerte, Xioylmar.</p>
+            <p>No espero que este mensaje tenga una respuesta inmediata, ni que sea positiva, mi amistad por ti vale más que eso, y quiero que lo tengas claro, quiero seguir aquí pase lo que pase, tampoco espero que después de hoy, tengamos una boda maravillosa, lo estuve pensando, (Aunque si quiero boda en playa) pero, después de 12 largos años, hay solo una pregunta que hacerte, Xiolymar.</p>
 
             <p>¿Te gustaría tener una cita conmigo, con más intenciones que solo ser tu amigo?</p>
-
+            
             </div>
         </div>
     </div>
-
-    <script>
 
     <script>
         // Función para cargar el reproductor de YouTube
@@ -238,7 +255,7 @@
             // Estado 0 significa que el video ha terminado
             if (event.data === 0) {
                 // Mostrar el botón para ver la carta
-                document.getElementById('view-message-button').style.display = 'inline-block';
+                document.getElementById('download-button').style.display = 'inline-block';
             }
         }
         
@@ -246,10 +263,10 @@
         window.addEventListener('load', loadYouTubePlayer);
         
         // Manejar el clic en el botón para mostrar la carta
-        document.getElementById('view-message-button').addEventListener('click', function() {
-            document.getElementById('letter-container').style.display = 'block';
+        document.getElementById('download-button').addEventListener('click', function() {
+            document.getElementById('letter').style.display = 'block';
             // Desplazarse suavemente hasta la carta
-            document.getElementById('letter-container').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('letter').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
