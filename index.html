@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un mensaje especial para Xiolymar</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #0c1445 0%, #1e4264 50%, #2c5a7a 100%);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #fff;
+            background-attachment: fixed;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .swirl {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(#f3d673, #f8de8f, transparent 70%);
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .swirl-1 {
+            width: 180px;
+            height: 180px;
+            top: 15%;
+            right: 10%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .swirl-2 {
+            width: 100px;
+            height: 100px;
+            top: 35%;
+            left: 15%;
+            animation: float 18s infinite ease-in-out reverse;
+        }
+
+        .swirl-3 {
+            width: 120px;
+            height: 120px;
+            bottom: 20%;
+            right: 25%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-10px) translateX(15px) rotate(5deg); }
+            50% { transform: translateY(0) translateX(0) rotate(0deg); }
+            75% { transform: translateY(10px) translateX(-15px) rotate(-5deg); }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: #f3d673;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 2.2em;
+        }
+
+        .music-player {
+            margin: 40px auto;
+            padding: 20px;
+            background-color: rgba(44, 62, 106, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .instructions {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #f3d673;
+        }
+
+        .letter-container {
+            display: none;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .letter-image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 3px solid #f3d673;
+        }
+
+        button {
+            background: linear-gradient(to right, #f3d673, #e9bc4f);
+            color: #0c1445;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            display: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #e9bc4f, #f3d673);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <div class="swirl swirl-1"></div>
+    <div class="swirl swirl-2"></div>
+    <div class="swirl swirl-3"></div>
+
+    <div class="container">
+        <h1>Tengo algo importante que decirte, Xiolymar...</h1>
+        
+        <div class="instructions">
+            Por favor, escucha esta canción completa. Cuando termine, aparecerá un mensaje especial para ti.
+        </div>
+        
+        <div class="music-player">
+            <p>Para continuar, por favor escucha "El embrujo" de Morat:</p>
+            <div id="player-container">
+                <p>Cargando reproductor...</p>
+            </div>
+        </div>
+        
+        <button id="view-message-button">Ver mi mensaje</button>
+        
+        <button id="download-button">Leer mensaje</button>
+        
+        <div id="letter" class="letter-section">
+            <h2 class="letter-title">Para la persona más especial en mi vida</h2>
+            
+            <!-- Aquí escribe tu carta. Este es solo un ejemplo, reemplázalo con tus propias palabras -->
+            <p>Querida Xiolymar,</p>
+            
+            <p>Quizás esta no es la carta de cumpleaños que esperabas recibir, pero es la carta sincera que siempre quise darte.</p>
+            
+            <p>Hay momentos en la vida donde no se encuentran las palabras para expresar todo un mar, el nudo en la garganta se fortalece y a veces, el valor no alcanza, pero hoy, hoy por fin tuve la valentía de decir lo que siento, de la forma que se hacerlo.</p>
+            
+            <p>No hay nada que pueda hacer más que decirlo, por primera vez, después de 12 años, decirlo no con voz, pero si con letra, cada instante a tu lado se vuelve oro, para mí, eres calma entre el caos, eres mi lado más bonito de la moneda, la sonrisa que más bonita que he visto y los ojos con más magia que conozco, eres a quien siempre he tenido conmigo, en las buenas y en las malas, y a pesar de que siempre he asumido que sabes que conoces mis sentimientos, nunca tuve el valor de decirlo, porque no soy de hacer las cosas al pie de la letra, en realidad.</p>
+            
+            <p>Nuestra amistad es de las cosas más bonitas y más valiosas de mi vida, y adoro tenerte como amiga, adoro darte los buenos días, escucharte y apoyarte, estar contigo en las buenas y en las malas, sentarme contigo en el monte a hablar de la vida, perderme en tus ojos cuando me hablas, e imaginar que por fin me atrevo y te robo un beso.</p>
+            
+            <p>La vida me permitió conectar contigo y jamás podré pagárselo, por eso prefiero ser justo con ella y por fin hacerle justicia a la gran luz que me envió junto a ti, siendo totalmente honesto contigo, las he contado una y otra vez, y al recopilarlo, siempre has estado, una y otra casualidad, que se vuelven un enorme y claro punto, en el cual siempre logras integrarte, una casualidad tras otra, una causalidad tras otra, eres no solo la casualidad más recurrente, también eres la más bonita de ellas.</p>
+            
+            <p>Las casualidades nos han traído hasta acá y posiblemente por caminos diferentes, no necesito una respuesta positiva, o una negativa, solo necesito dejar de hacerme la idea de que existe una posibilidad o, hacerme cargo de esa posibilidad y volverlo realidad. </p>
+            
+            <p>Mi mente ha estado transformando nuestros mensajes en una posibilidad de conexión que quizás no exista, y debo parar de hacerlo, quiero vivir la realidad en todos sus colores, aunque esa realidad no incluya la idea de que estemos juntos, de la forma en que lo quiero</p>
+
+            <p>Quisiera poder extenderme y hablar todo lo que he sentido durante todo este tiempo, pero no hacen falta muchas palabras para decir algo de lo que estoy seguro, y es que te quiero a mi lado, por mucho más tiempo, como amigos, o como lo que estemos dispuestos a construir.</p>
+
+            <p>No espero que este mensaje tenga una respuesta inmediata, ni que sea positiva, mi amistad por ti vale más que eso, y quiero que lo tengas claro, quiero seguir aquí pase lo que pase, tampoco espero que después de hoy, tengamos una boda maravillosa, lo estuve pensando, (Aunque si quiero boda en playa) pero, después de 12 largos años, hay solo una pregunta que hacerte, Xioylmar.</p>
+
+            <p>¿Te gustaría tener una cita conmigo, con más intenciones que solo ser tu amigo?</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    <script>
+        // Función para cargar el reproductor de YouTube
+        function loadYouTubePlayer() {
+            // Crear un elemento iframe para el reproductor de YouTube
+            const iframe = document.createElement('iframe');
+            iframe.width = "560";
+            iframe.height = "315";
+            // ID del video "El embrujo" de Morat
+            iframe.src = "https://www.youtube.com/embed/4pPMt6ZhCa4?enablejsapi=1";
+            iframe.frameborder = "0";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            iframe.id = "youtube-player";
+            
+            // Reemplazar el contenido del contenedor
+            const container = document.getElementById('player-container');
+            container.innerHTML = '';
+            container.appendChild(iframe);
+            
+            // Cargar la API de YouTube
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+        
+        // Variable para el reproductor de YouTube
+        let player;
+        
+        // Función llamada por la API de YouTube cuando está lista
+        window.onYouTubeIframeAPIReady = function() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        };
+        
+        // Función para manejar cambios en el estado del reproductor
+        function onPlayerStateChange(event) {
+            // Estado 0 significa que el video ha terminado
+            if (event.data === 0) {
+                // Mostrar el botón para ver la carta
+                document.getElementById('view-message-button').style.display = 'inline-block';
+            }
+        }
+        
+        // Cargar el reproductor cuando la página esté lista
+        window.addEventListener('load', loadYouTubePlayer);
+        
+        // Manejar el clic en el botón para mostrar la carta
+        document.getElementById('view-message-button').addEventListener('click', function() {
+            document.getElementById('letter-container').style.display = 'block';
+            // Desplazarse suavemente hasta la carta
+            document.getElementById('letter-container').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
