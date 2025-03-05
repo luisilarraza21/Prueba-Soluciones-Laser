@@ -115,7 +115,6 @@
             cursor: pointer;
             font-size: 16px;
             margin-top: 20px;
-            display: none;
             font-weight: bold;
             box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
             transition: all 0.3s ease;
@@ -128,226 +127,56 @@
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(255, 183, 0, 0.7);
         }
-        
-        .warning-message {
-            color: #fbbf24;
-            font-weight: bold;
-            margin-top: 10px;
-            display: none;
-        }
-        
-        .status-message {
-            margin-top: 15px;
-            font-style: italic;
-            color: #cbd5e1;
-        }
-        
-        /* Remove swirls on mobile to improve performance */
-        @media (max-width: 768px) {
-            .swirl {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Remolinos al estilo Van Gogh -->
-    <div class="swirl"></div>
-    <div class="swirl"></div>
-    <div class="swirl"></div>
-    <div class="swirl"></div>
-    
     <div class="container">
         <h1>Tengo algo importante que decirte, Xiolymar...</h1>
         
         <div class="instructions">
-            Por favor, escucha esta canción completa. Cuando termine, aparecerá un mensaje especial para ti.
+            Por favor, escucha esta canción de Morat mientras te leo algo especial.
         </div>
         
         <div class="music-player">
-            <p>Para continuar, por favor escucha "El embrujo" de Morat:</p>
             <div id="player-container">
-                <p>Cargando reproductor...</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/4pPMt6ZhCa4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <p id="warning-message" class="warning-message">Debes escuchar la canción completa para continuar</p>
-            <p id="status-message" class="status-message"></p>
         </div>
         
-        <button id="download-button">Leer mensaje</button>
+        <button id="read-message-btn">Leer mensaje</button>
         
         <div id="letter" class="letter-section">
-            <!-- Previous letter content remains the same -->
             <h2 class="letter-title">Para mi mejor amiga</h2>
             
-<div id="letter" class="letter-section">
-    <h2 class="letter-title">Para mi mejor amiga</h2>
-    
-    <p>Querida Xiolymar,</p>
-    
-    <p>Quizás esta no es la carta de cumpleaños que esperabas recibir, pero es la carta sincera que siempre quise darte.</p>
-    
-    <p>Hay momentos en la vida donde no se encuentran las palabras para expresar todo un mar, el nudo en la garganta se fortalece y a veces, el valor no alcanza, pero hoy, hoy por fin tuve la valentía de decir lo que siento, de la forma que se hacerlo.</p>
-    
-    <p>No hay nada que pueda hacer más que decirlo, por primera vez, después de 12 años, decirlo no con voz, pero si con letra, cada instante a tu lado se vuelve oro, para mí, eres calma entre el caos, eres mi lado más bonito de la moneda, la sonrisa que más bonita que he visto y los ojos con más magia que conozco, eres a quien siempre he tenido conmigo, en las buenas y en las malas, y a pesar de que siempre he asumido que sabes que conoces mis sentimientos, nunca tuve el valor de decirlo, porque no soy de hacer las cosas al pie de la letra, en realidad.</p>
-    
-    <p>Nuestra amistad es de las cosas más bonitas y más valiosas de mi vida, y adoro tenerte como amiga, adoro darte los buenos días, escucharte y apoyarte, estar contigo en las buenas y en las malas, sentarme contigo en el monte a hablar de la vida, perderme en tus ojos cuando me hablas, e imaginar que por fin me atrevo y te robo un beso.</p>
-    
-    <p>La vida me permitió conectar contigo y jamás podré pagárselo, por eso prefiero ser justo con ella y por fin hacerle justicia a la gran luz que me envió junto a ti, siendo totalmente honesto contigo, las he contado una y otra vez, y al recopilarlo, siempre has estado, una y otra casualidad, que se vuelven un enorme y claro punto, en el cual siempre logras integrarte, una casualidad tras otra, una causalidad tras otra, eres no solo la casualidad más recurrente, también eres la más bonita de ellas.</p>
-    
-    <p>Las casualidades nos han traído hasta acá y posiblemente por caminos diferentes, no necesito una respuesta positiva, o una negativa, solo necesito dejar de hacerme la idea de que existe una posibilidad o, hacerme cargo de esa posibilidad y volverlo realidad. </p>
-    
-    <p>Mi mente ha estado transformando nuestros mensajes en una posibilidad de conexión que quizás no exista, y debo parar de hacerlo, quiero vivir la realidad en todos sus colores, aunque esa realidad no incluya la idea de que estemos juntos, de la forma en que lo quiero</p>
+            <p>Querida Xiolymar,</p>
+            
+            <p>Quizás esta no es la carta de cumpleaños que esperabas recibir, pero es la carta sincera que siempre quise darte.</p>
+            
+            <p>Hay momentos en la vida donde no se encuentran las palabras para expresar todo un mar, el nudo en la garganta se fortalece y a veces, el valor no alcanza, pero hoy, hoy por fin tuve la valentía de decir lo que siento, de la forma que se hacerlo.</p>
+            
+            <p>No hay nada que pueda hacer más que decirlo, por primera vez, después de 12 años, decirlo no con voz, pero si con letra, cada instante a tu lado se vuelve oro, para mí, eres calma entre el caos, eres mi lado más bonito de la moneda, la sonrisa que más bonita que he visto y los ojos con más magia que conozco, eres a quien siempre he tenido conmigo, en las buenas y en las malas, y a pesar de que siempre he asumido que sabes que conoces mis sentimientos, nunca tuve el valor de decirlo, porque no soy de hacer las cosas al pie de la letra, en realidad.</p>
+            
+            <p>Nuestra amistad es de las cosas más bonitas y más valiosas de mi vida, y adoro tenerte como amiga, adoro darte los buenos días, escucharte y apoyarte, estar contigo en las buenas y en las malas, sentarme contigo en el monte a hablar de la vida, perderme en tus ojos cuando me hablas, e imaginar que por fin me atrevo y te robo un beso.</p>
+            
+            <p>La vida me permitió conectar contigo y jamás podré pagárselo, por eso prefiero ser justo con ella y por fin hacerle justicia a la gran luz que me envió junto a ti, siendo totalmente honesto contigo, las he contado una y otra vez, y al recopilarlo, siempre has estado, una y otra casualidad, que se vuelven un enorme y claro punto, en el cual siempre logras integrarte, una casualidad tras otra, una causalidad tras otra, eres no solo la casualidad más recurrente, también eres la más bonita de ellas.</p>
+            
+            <p>Las casualidades nos han traído hasta acá y posiblemente por caminos diferentes, no necesito una respuesta positiva, o una negativa, solo necesito dejar de hacerme la idea de que existe una posibilidad o, hacerme cargo de esa posibilidad y volverlo realidad. </p>
+            
+            <p>Mi mente ha estado transformando nuestros mensajes en una posibilidad de conexión que quizás no exista, y debo parar de hacerlo, quiero vivir la realidad en todos sus colores, aunque esa realidad no incluya la idea de que estemos juntos, de la forma en que lo quiero</p>
 
-    <p>Quisiera poder extenderme y hablar todo lo que he sentido durante todo este tiempo, pero no hacen falta muchas palabras para decir algo de lo que estoy seguro, y es que te quiero a mi lado, por mucho más tiempo, como amigos, o como lo que estemos dispuestos a construir.</p>
+            <p>Quisiera poder extenderme y hablar todo lo que he sentido durante todo este tiempo, pero no hacen falta muchas palabras para decir algo de lo que estoy seguro, y es que te quiero a mi lado, por mucho más tiempo, como amigos, o como lo que estemos dispuestos a construir.</p>
 
-    <p>No espero que este mensaje tenga una respuesta inmediata, ni que sea positiva, mi amistad por ti vale más que eso, y quiero que lo tengas claro, quiero seguir aquí pase lo que pase, tampoco espero que después de hoy, tengamos una boda maravillosa, lo estuve pensando, (Aunque si quiero boda en playa) pero, después de 12 largos años, hay solo una pregunta que hacerte, Xiolymar.</p>
+            <p>No espero que este mensaje tenga una respuesta inmediata, ni que sea positiva, mi amistad por ti vale más que eso, y quiero que lo tengas claro, quiero seguir aquí pase lo que pase, tampoco espero que después de hoy, tengamos una boda maravillosa, lo estuve pensando, (Aunque si quiero boda en playa) pero, después de 12 largos años, hay solo una pregunta que hacerte, Xiolymar.</p>
 
-    <p>¿Te gustaría tener una cita conmigo, con más intenciones que solo ser tu amigo?</p>
-
+            <p>¿Te gustaría tener una cita conmigo, con más intenciones que solo ser tu amigo?</p>
+        </div>
     </div>
 
     <script>
-        // The previous JavaScript remains mostly the same
-        // Variables for playback control
-        let player;
-        let videoLength = 0;
-        let lastPlayheadPosition = 0;
-        let videoStarted = false;
-        let validPlaythrough = true;
-        let checkInterval;
-        let videoEnded = false;
-        
-        // Function to load YouTube player
-        function loadYouTubePlayer() {
-            const iframe = document.createElement('iframe');
-            iframe.width = "100%";
-            iframe.height = "315";
-            iframe.src = "https://www.youtube.com/embed/4pPMt6ZhCa4?enablejsapi=1&disablekb=1&modestbranding=1&controls=0&rel=0&loop=0";
-            iframe.frameborder = "0";
-            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-            iframe.allowFullscreen = true;
-            iframe.id = "youtube-player";
-            
-            const container = document.getElementById('player-container');
-            container.innerHTML = '';
-            container.appendChild(iframe);
-            
-            const tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        }
-        
-        // Rest of the script remains the same as in the previous version
-        window.onYouTubeIframeAPIReady = function() {
-            player = new YT.Player('youtube-player', {
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        };
-        
-        function onPlayerReady(event) {
-            setTimeout(function() {
-                videoLength = player.getDuration();
-                console.log("Duración del video: " + videoLength + " segundos");
-                
-                player.playVideo();
-                
-                checkInterval = setInterval(checkPlaybackProgress, 1000);
-                
-                updateStatusMessage("Reproduciendo...");
-            }, 1000);
-        }
-        
-        function checkPlaybackProgress() {
-            if (!player) return;
-            
-            const playerState = player.getPlayerState();
-            const currentTime = player.getCurrentTime();
-            
-            if (playerState === YT.PlayerState.PLAYING) {
-                const timeLeft = Math.max(0, videoLength - currentTime);
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = Math.floor(timeLeft % 60);
-                updateStatusMessage(`Tiempo restante: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
-            }
-            
-            if (playerState !== YT.PlayerState.PLAYING) return;
-            
-            if (!videoStarted && currentTime > 0) {
-                videoStarted = true;
-            }
-            
-            if (videoStarted && currentTime > lastPlayheadPosition + 2) {
-                validPlaythrough = false;
-                player.seekTo(0, true);
-                showWarningMessage();
-            }
-            
-            lastPlayheadPosition = currentTime;
-        }
-        
-        function onPlayerStateChange(event) {
-            console.log("Estado del reproductor: " + event.data);
-            
-            if (event.data === YT.PlayerState.ENDED) {
-                console.log("Video terminado");
-                clearInterval(checkInterval);
-                videoEnded = true;
-                
-                updateStatusMessage("¡Video completado! Ahora puedes leer el mensaje.");
-                
-                // Ensure button becomes visible
-                const downloadButton = document.getElementById('download-button');
-                if (validPlaythrough) {
-                    downloadButton.style.display = 'inline-block';
-                } else {
-                    resetPlayback();
-                }
-            }
-            
-            if (event.data === YT.PlayerState.PAUSED && !videoEnded) {
-                validPlaythrough = false;
-                player.playVideo();
-                showWarningMessage();
-            }
-        }
-        
-        function showWarningMessage() {
-            const warningMsg = document.getElementById('warning-message');
-            warningMsg.style.display = 'block';
-            
-            setTimeout(function() {
-                warningMsg.style.display = 'none';
-            }, 3000);
-        }
-        
-        function updateStatusMessage(message) {
-            const statusMsg = document.getElementById('status-message');
-            statusMsg.textContent = message;
-        }
-        
-        function resetPlayback() {
-            validPlaythrough = true;
-            videoStarted = false;
-            videoEnded = false;
-            lastPlayheadPosition = 0;
-            player.seekTo(0, true);
-            player.playVideo();
-            
-            clearInterval(checkInterval);
-            checkInterval = setInterval(checkPlaybackProgress, 1000);
-            
-            updateStatusMessage("Reproduciendo desde el inicio...");
-        }
-        
-        window.addEventListener('load', loadYouTubePlayer);
-        
-        document.getElementById('download-button').addEventListener('click', function() {
-            document.getElementById('letter').style.display = 'block';
-            document.getElementById('letter').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('read-message-btn').addEventListener('click', function() {
+            const letterSection = document.getElementById('letter');
+            letterSection.style.display = 'block';
+            letterSection.scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
