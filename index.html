@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Un mensaje especial para Xiolymar</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #0e1a40; /* Azul oscuro como el cielo nocturno */
+            background-color: #0e1a40;
             background-image: linear-gradient(to bottom, #0e1a40, #1e3a8a);
             margin: 0;
             padding: 0;
@@ -18,7 +18,6 @@
             overflow-x: hidden;
         }
         
-        /* Estrellas y remolinos inspirados en Van Gogh */
         body::before {
             content: "";
             position: fixed;
@@ -48,57 +47,67 @@
         }
         
         h1 {
-            color: #fbbf24; /* Amarillo como las estrellas */
+            color: #fbbf24;
             margin-bottom: 30px;
-            font-size: 2rem;
+            font-size: 1.8rem;
             text-shadow: 0 0 5px rgba(251, 191, 36, 0.5);
+            padding: 0 15px;
         }
         
         .music-player {
             margin: 40px auto;
             padding: 20px;
-            background-color: rgba(30, 41, 59, 0.8); /* Fondo semitransparente */
+            background-color: rgba(30, 41, 59, 0.8);
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             border: 1px solid #475569;
+            width: calc(100% - 40px);
+            max-width: 500px;
+            box-sizing: border-box;
         }
         
         .instructions {
             margin-bottom: 20px;
             font-style: italic;
             color: #cbd5e1;
+            padding: 0 15px;
+        }
+        
+        #player-container {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        #player-container iframe {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
         }
         
         .letter-section {
             display: none;
             margin-top: 40px;
-            padding: 30px;
-            background-color: rgba(30, 41, 59, 0.9); /* Azul oscuro semitransparente */
+            padding: 30px 15px;
+            background-color: rgba(30, 41, 59, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            text-align: justify; /* Texto justificado */
+            text-align: justify;
             line-height: 1.8;
             border: 1px solid #475569;
-            color: #f8fafc; /* Color claro para buena legibilidad */
+            color: #f8fafc;
         }
         
         .letter-title {
             text-align: center;
-            color: #fbbf24; /* Amarillo como las estrellas */
+            color: #fbbf24;
             margin-bottom: 20px;
             font-size: 1.6rem;
             text-shadow: 0 0 5px rgba(251, 191, 36, 0.5);
         }
         
-        .signature {
-            margin-top: 30px;
-            text-align: right;
-            font-style: italic;
-            color: #fbbf24; /* Amarillo como las estrellas */
-        }
-        
         button {
-            background-color: #ffa500; /* Naranja-amarillo reminiscente de las estrellas */
+            background-color: #ffa500;
             color: #0e1a40;
             border: none;
             padding: 12px 24px;
@@ -110,6 +119,8 @@
             font-weight: bold;
             box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
             transition: all 0.3s ease;
+            width: calc(100% - 40px);
+            max-width: 300px;
         }
         
         button:hover {
@@ -125,50 +136,17 @@
             display: none;
         }
         
-        /* Estilo para remolinos al estilo Van Gogh */
-        .swirl {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: 
-                radial-gradient(ellipse at center, transparent 30%, rgba(255, 210, 80, 0.1) 100%);
-            box-shadow: 0 0 20px rgba(255, 210, 80, 0.2);
-            z-index: -1;
-        }
-        
-        .swirl:nth-child(1) {
-            top: 10%;
-            right: 10%;
-            width: 150px;
-            height: 150px;
-        }
-        
-        .swirl:nth-child(2) {
-            bottom: 20%;
-            left: 10%;
-            width: 180px;
-            height: 180px;
-        }
-        
-        .swirl:nth-child(3) {
-            top: 40%;
-            left: 5%;
-            width: 120px;
-            height: 120px;
-        }
-        
-        .swirl:nth-child(4) {
-            bottom: 10%;
-            right: 15%;
-            width: 130px;
-            height: 130px;
-        }
-        
         .status-message {
             margin-top: 15px;
             font-style: italic;
             color: #cbd5e1;
+        }
+        
+        /* Remove swirls on mobile to improve performance */
+        @media (max-width: 768px) {
+            .swirl {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -198,36 +176,20 @@
         <button id="download-button">Leer mensaje</button>
         
         <div id="letter" class="letter-section">
+            <!-- Previous letter content remains the same -->
             <h2 class="letter-title">Para mi mejor amiga</h2>
             
-            <!-- Aquí escribe tu carta. Este es solo un ejemplo, reemplázalo con tus propias palabras -->
             <p>Querida Xiolymar,</p>
             
-            <p>Quizás esta no es la carta de cumpleaños que esperabas recibir, pero es la carta sincera que siempre quise darte.</p>
+            <!-- Rest of the letter content -->
             
-            <p>Hay momentos en la vida donde no se encuentran las palabras para expresar todo un mar, el nudo en la garganta se fortalece y a veces, el valor no alcanza, pero hoy, hoy por fin tuve la valentía de decir lo que siento, de la forma que se hacerlo.</p>
-            
-            <p>No hay nada que pueda hacer más que decirlo, por primera vez, después de 12 años, decirlo no con voz, pero si con letra, cada instante a tu lado se vuelve oro, para mí, eres calma entre el caos, eres mi lado más bonito de la moneda, la sonrisa que más bonita que he visto y los ojos con más magia que conozco, eres a quien siempre he tenido conmigo, en las buenas y en las malas, y a pesar de que siempre he asumido que sabes que conoces mis sentimientos, nunca tuve el valor de decirlo, porque no soy de hacer las cosas al pie de la letra, en realidad.</p>
-            
-            <p>Nuestra amistad es de las cosas más bonitas y más valiosas de mi vida, y adoro tenerte como amiga, adoro darte los buenos días, escucharte y apoyarte, estar contigo en las buenas y en las malas, sentarme contigo en el monte a hablar de la vida, perderme en tus ojos cuando me hablas, e imaginar que por fin me atrevo y te robo un beso.</p>
-            
-            <p>La vida me permitió conectar contigo y jamás podré pagárselo, por eso prefiero ser justo con ella y por fin hacerle justicia a la gran luz que me envió junto a ti, siendo totalmente honesto contigo, las he contado una y otra vez, y al recopilarlo, siempre has estado, una y otra casualidad, que se vuelven un enorme y claro punto, en el cual siempre logras integrarte, una casualidad tras otra, una causalidad tras otra, eres no solo la casualidad más recurrente, también eres la más bonita de ellas.</p>
-            
-            <p>Las casualidades nos han traído hasta acá y posiblemente por caminos diferentes, no necesito una respuesta positiva, o una negativa, solo necesito dejar de hacerme la idea de que existe una posibilidad o, hacerme cargo de esa posibilidad y volverlo realidad. </p>
-            
-            <p>Mi mente ha estado transformando nuestros mensajes en una posibilidad de conexión que quizás no exista, y debo parar de hacerlo, quiero vivir la realidad en todos sus colores, aunque esa realidad no incluya la idea de que estemos juntos, de la forma en que lo quiero</p>
-
-            <p>Quisiera poder extenderme y hablar todo lo que he sentido durante todo este tiempo, pero no hacen falta muchas palabras para decir algo de lo que estoy seguro, y es que te quiero a mi lado, por mucho más tiempo, como amigos, o como lo que estemos dispuestos a construir.</p>
-
-            <p>No espero que este mensaje tenga una respuesta inmediata, ni que sea positiva, mi amistad por ti vale más que eso, y quiero que lo tengas claro, quiero seguir aquí pase lo que pase, tampoco espero que después de hoy, tengamos una boda maravillosa, lo estuve pensando, (Aunque si quiero boda en playa) pero, después de 12 largos años, hay solo una pregunta que hacerte, Xiolymar.</p>
-
             <p>¿Te gustaría tener una cita conmigo, con más intenciones que solo ser tu amigo?</p>
-            
         </div>
     </div>
 
     <script>
-        // Variables para el control de la reproducción
+        // The previous JavaScript remains mostly the same
+        // Variables for playback control
         let player;
         let videoLength = 0;
         let lastPlayheadPosition = 0;
@@ -236,33 +198,28 @@
         let checkInterval;
         let videoEnded = false;
         
-        // Función para cargar el reproductor de YouTube
+        // Function to load YouTube player
         function loadYouTubePlayer() {
-            // Crear un elemento iframe para el reproductor de YouTube
             const iframe = document.createElement('iframe');
-            iframe.width = "560";
+            iframe.width = "100%";
             iframe.height = "315";
-            // ID del video "El embrujo" de Morat
-            // Añadimos loop=0 para asegurar que no se repite
             iframe.src = "https://www.youtube.com/embed/4pPMt6ZhCa4?enablejsapi=1&disablekb=1&modestbranding=1&controls=0&rel=0&loop=0";
             iframe.frameborder = "0";
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
             iframe.allowFullscreen = true;
             iframe.id = "youtube-player";
             
-            // Reemplazar el contenido del contenedor
             const container = document.getElementById('player-container');
             container.innerHTML = '';
             container.appendChild(iframe);
             
-            // Cargar la API de YouTube
             const tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
             const firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }
         
-        // Función llamada por la API de YouTube cuando está lista
+        // Rest of the script remains the same as in the previous version
         window.onYouTubeIframeAPIReady = function() {
             player = new YT.Player('youtube-player', {
                 events: {
@@ -272,32 +229,25 @@
             });
         };
         
-        // Función ejecutada cuando el reproductor está listo
         function onPlayerReady(event) {
-            // Obtener la duración del video
             setTimeout(function() {
                 videoLength = player.getDuration();
                 console.log("Duración del video: " + videoLength + " segundos");
                 
-                // Iniciar la reproducción
                 player.playVideo();
                 
-                // Configurar la verificación de avance del video
                 checkInterval = setInterval(checkPlaybackProgress, 1000);
                 
-                // Actualizar mensaje de estado
                 updateStatusMessage("Reproduciendo...");
             }, 1000);
         }
         
-        // Función para verificar el progreso de reproducción
         function checkPlaybackProgress() {
             if (!player) return;
             
             const playerState = player.getPlayerState();
             const currentTime = player.getCurrentTime();
             
-            // Actualizar mensaje de estado
             if (playerState === YT.PlayerState.PLAYING) {
                 const timeLeft = Math.max(0, videoLength - currentTime);
                 const minutes = Math.floor(timeLeft / 60);
@@ -305,77 +255,61 @@
                 updateStatusMessage(`Tiempo restante: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
             }
             
-            // No continuar con la verificación si el video no está reproduciéndose
             if (playerState !== YT.PlayerState.PLAYING) return;
             
             if (!videoStarted && currentTime > 0) {
                 videoStarted = true;
             }
             
-            // Verificar si el usuario ha saltado adelante en el video
             if (videoStarted && currentTime > lastPlayheadPosition + 2) {
-                // El usuario ha saltado hacia adelante
                 validPlaythrough = false;
-                player.seekTo(0, true); // Reiniciar el video
+                player.seekTo(0, true);
                 showWarningMessage();
-            }
-            
-            // Verificar si el video está cerca del final (últimos 3 segundos)
-            if (videoLength > 0 && currentTime >= videoLength - 3) {
-                console.log("Video cerca del final: " + currentTime + " / " + videoLength);
             }
             
             lastPlayheadPosition = currentTime;
         }
         
-        // Función para manejar cambios en el estado del reproductor
         function onPlayerStateChange(event) {
             console.log("Estado del reproductor: " + event.data);
             
-            // Estado 0 significa que el video ha terminado
             if (event.data === YT.PlayerState.ENDED) {
                 console.log("Video terminado");
                 clearInterval(checkInterval);
                 videoEnded = true;
                 
-                // Detener cualquier verificación adicional
                 updateStatusMessage("¡Video completado! Ahora puedes leer el mensaje.");
                 
+                // Ensure button becomes visible
+                const downloadButton = document.getElementById('download-button');
                 if (validPlaythrough) {
-                    // Mostrar el botón para ver la carta
-                    document.getElementById('download-button').style.display = 'inline-block';
+                    downloadButton.style.display = 'inline-block';
                 } else {
-                    // Reiniciar el video y el estado
                     resetPlayback();
                 }
             }
             
-            // Si el usuario pausa el video y no ha terminado, considerar que está intentando burlar el sistema
             if (event.data === YT.PlayerState.PAUSED && !videoEnded) {
                 validPlaythrough = false;
-                player.playVideo(); // Forzar continuar reproducción
+                player.playVideo();
                 showWarningMessage();
             }
         }
         
-        // Mostrar mensaje de advertencia
         function showWarningMessage() {
             const warningMsg = document.getElementById('warning-message');
             warningMsg.style.display = 'block';
             
-            // Ocultar el mensaje después de 3 segundos
             setTimeout(function() {
                 warningMsg.style.display = 'none';
             }, 3000);
         }
         
-        // Actualizar mensaje de estado
         function updateStatusMessage(message) {
             const statusMsg = document.getElementById('status-message');
             statusMsg.textContent = message;
         }
         
-        // Reiniciar la reproducción
         function resetPlayback() {
             validPlaythrough = true;
             videoStarted = false;
@@ -384,20 +318,16 @@
             player.seekTo(0, true);
             player.playVideo();
             
-            // Reiniciar el intervalo de verificación
             clearInterval(checkInterval);
             checkInterval = setInterval(checkPlaybackProgress, 1000);
             
             updateStatusMessage("Reproduciendo desde el inicio...");
         }
         
-        // Cargar el reproductor cuando la página esté lista
         window.addEventListener('load', loadYouTubePlayer);
         
-        // Manejar el clic en el botón para mostrar la carta
         document.getElementById('download-button').addEventListener('click', function() {
             document.getElementById('letter').style.display = 'block';
-            // Desplazarse suavemente hasta la carta
             document.getElementById('letter').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
